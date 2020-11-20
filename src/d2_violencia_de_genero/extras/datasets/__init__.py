@@ -25,44 +25,7 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Construction of the master pipeline.
+"""d2-violencia-de-genero
 """
 
-from typing import Dict
-
-from kedro.pipeline import Pipeline
-
-from d2_violencia_de_genero.pipelines import data_engineering as de
-from d2_violencia_de_genero.pipelines import data_science as ds
-from d2_violencia_de_genero.pipelines import pdf_preprocess as pp
-
-###########################################################################
-# Here you can find an example pipeline, made of two modular pipelines.
-#
-# Delete this when you start working on your own Kedro project as
-# well as pipelines/data_science AND pipelines/data_engineering
-# -------------------------------------------------------------------------
-
-
-def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
-    """Create the project's pipeline.
-
-    Args:
-        kwargs: Ignore any additional arguments added in the future.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-
-    """
-
-    data_engineering_pipeline = de.create_pipeline()
-    data_science_pipeline = ds.create_pipeline()
-    pdf_preprocess_pipeline = pp.create_pipeline()
-
-    return {
-        "pp": pdf_preprocess_pipeline,
-        "de": data_engineering_pipeline,
-        "ds": data_science_pipeline,
-        "__default__": pdf_preprocess_pipeline,
-    }
+__version__ = "0.1"
