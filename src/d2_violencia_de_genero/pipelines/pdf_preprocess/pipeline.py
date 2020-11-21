@@ -33,12 +33,10 @@ generated using Kedro 0.16.2
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import check_path
+from .nodes import extract_information
 
 
 def create_pipeline(**kwargs):
     return Pipeline(
-        [
-            node(check_path,"" , ""), 
-        ]
-        )
+        [node(func=extract_information, inputs="pdf_ovd_data", outputs="txt_ovd_data"),]
+    )

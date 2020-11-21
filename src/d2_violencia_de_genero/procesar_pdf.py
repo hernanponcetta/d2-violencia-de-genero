@@ -135,11 +135,7 @@ if __name__ == "__main__":
         help="Process all files in the root folder",
     )
     parser.add_argument(
-        "-f",
-        "--file",
-        required=False,
-        dest="file",
-        help="File to be processed",
+        "-f", "--file", required=False, dest="file", help="File to be processed",
     )
 
     args = parser.parse_args()
