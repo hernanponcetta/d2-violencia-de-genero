@@ -1,4 +1,4 @@
-# Pipeline pdf_preprocess
+# Pipeline pdf_extract
 
 > *Note:* This is a `README.md` boilerplate generated using `Kedro 0.16.2`.
 

@@ -3,7 +3,7 @@ import io
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfinterp import PDFPageInterpreter
-from pdfminer.converter import 
+from pdfminer.converter import TextConverter
 
 from kedro.io.core import AbstractDataSet, DataSetError
 
@@ -18,8 +18,8 @@ class PdfDataSet(AbstractDataSet):
 
         page_list = []
 
-        with open(self._filepath, 'rb') as f:
-            for page in PDFPage.get_pages(f, caching=True, check_extractable=True):
+        with open(self._filepath, 'rb') as pdf:
+            for page in PDFPage.get_pages(pdf, caching=True, check_extractable=True):
                         resource_manager = PDFResourceManager()
                         fake_file_handle = io.StringIO()
                         converter = TextConverter(resource_manager, fake_file_handle)
@@ -27,6 +27,9 @@ class PdfDataSet(AbstractDataSet):
                         page_interpreter.process_page(page)
                         text = fake_file_handle.getvalue()               
                         page_list.append(text)
+
+        converter.close()
+        fake_file_handle.close()
 
         return page_list
 

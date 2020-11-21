@@ -25,18 +25,9 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
-This is a boilerplate pipeline 'pdf_preprocess'
+This is a boilerplate pipeline 'pdf_extract'
 generated using Kedro 0.16.2
 """
 
-from kedro.pipeline import Pipeline, node
-
-from .nodes import extract_information
-
-
-def create_pipeline(**kwargs):
-    return Pipeline(
-        [node(func=extract_information, inputs="pdf_ovd_data", outputs="txt_ovd_data"),]
-    )
+from .pipeline import create_pipeline  # NOQA

@@ -51,8 +51,8 @@ pdf_ovd_data:
   type: d2_violencia_de_genero.extras.datasets.pdf_dataset.PdfDataSet
   filepath: data/01_raw/OVD_data/OVD_1.pdf
 
-txt_ovd_data:
-  type: text.TextDataSet
-  filepath: data/01_raw/OVD_01.txt
+json_ovd_data:
+  type: d2_violencia_de_genero.extras.datasets.json_dataset.JsonDataSet
+  filepath: data/02_intermediate/OVD_data/OVD_01.json
 
 
