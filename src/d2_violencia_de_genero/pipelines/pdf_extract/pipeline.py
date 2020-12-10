@@ -32,24 +32,23 @@ generated using Kedro 0.16.2
 """
 
 from kedro.pipeline import Pipeline, node
-from .nodes import extract_information, filter_pages, filt_dict
+from .nodes import extract_information, filter_pages, filt_dict, filt_list
 
 
 def create_pipeline(**kwargs):
-    return Pipeline([
-        node(
-            func=extract_information,
-            inputs="pdf_ovd_data",
-            outputs="dict_pages",
-        ),
-        node(
-            func=filter_pages,
-            inputs="dict_pages",
-            outputs="filt_pages",
-        ),
-        node(
-            func=filt_dict,
-            inputs=['dict_pages', 'filt_pages'],
-            outputs="json_ovd_data"
-        )
-    ])
+    return Pipeline(
+        [
+            node(
+                func=extract_information, inputs="pdf_ovd_data", outputs="dict_pages",
+            ),
+            node(func=filter_pages, inputs="dict_pages", outputs="filt_pages",),
+            node(
+                func=filt_dict,
+                inputs=["dict_pages", "filt_pages"],
+                outputs="json_ovd_data",
+            ),
+            node(
+                func=filt_list, inputs=["dict_pages", "filt_pages"], outputs="filt_list"
+            ),
+        ]
+    )

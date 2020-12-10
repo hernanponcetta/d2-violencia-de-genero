@@ -55,4 +55,8 @@ json_ovd_data:
   type: d2_violencia_de_genero.extras.datasets.json_dataset.JsonDataSet
   filepath: data/02_intermediate/OVD_data/OVD_01.json
 
+excel_ovd_data:
+  type: pandas.ExcelDataSet
+  filepath: data/02_intermediate/OVD_text2.xlsx
+
 

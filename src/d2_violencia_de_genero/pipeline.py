@@ -33,9 +33,8 @@ from typing import Dict
 
 from kedro.pipeline import Pipeline
 
-from d2_violencia_de_genero.pipelines import data_engineering as de
-from d2_violencia_de_genero.pipelines import data_science as ds
 from d2_violencia_de_genero.pipelines import pdf_extract as pe
+from d2_violencia_de_genero.pipelines import pdf_scrap as ps
 
 ###########################################################################
 # Here you can find an example pipeline, made of two modular pipelines.
@@ -56,13 +55,11 @@ def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
 
     """
 
-    data_engineering_pipeline = de.create_pipeline()
-    data_science_pipeline = ds.create_pipeline()
     pdf_extract_pipeline = pe.create_pipeline()
+    pdf_scrap_pipeline = ps.create_pipeline()
 
     return {
-        "de": data_engineering_pipeline,
-        "ds": data_science_pipeline,
+        "ps": pdf_scrap_pipeline,
         "pe": pdf_extract_pipeline,
-        "__default__": pdf_extract_pipeline,
+        "__default__": pdf_extract_pipeline + pdf_scrap_pipeline,
     }

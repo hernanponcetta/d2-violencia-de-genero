@@ -1,5 +1,6 @@
 from fuzzysearch import find_near_matches
 
+
 def extract_information(pages_list):
 
     string_1 = "corte suprema de justicia de la nación"
@@ -17,6 +18,7 @@ def extract_information(pages_list):
 
     return pages_dict
 
+
 def filter_pages(page_dict, dist=10):
 
     page_number = list(page_dict.keys())
@@ -30,13 +32,24 @@ def filter_pages(page_dict, dist=10):
 
     return sorted(page_list)
 
+
 def filt_dict(pages_dict, pages_list):
-    
+
     filt_pages = {}
 
     for page_number in pages_dict:
-        if pages_list[0] <= page_number <= pages_list[-1]+1:
-            filt_pages[page_number] = pages_dict[page_number] 
+        if pages_list[0] <= page_number <= pages_list[-1] + 1:
+            filt_pages[page_number] = pages_dict[page_number]
 
     return filt_pages
-    
+
+
+def filt_list(pages_dict, pages_list):
+
+    filt_pages = []
+
+    for page_number in pages_dict:
+        if pages_list[0] <= page_number <= pages_list[-1] + 1:
+            filt_pages.append(pages_dict[page_number])
+
+    return filt_pages
