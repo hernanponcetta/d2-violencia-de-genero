@@ -26,43 +26,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Construction of the master pipeline.
+"""
+This is a boilerplate pipeline 'pdf_extract'
+generated using Kedro 0.16.2
 """
 
-from typing import Dict
-
-from kedro.pipeline import Pipeline
-
-from d2_violencia_de_genero.pipelines import pdf_extract as pe
-from d2_violencia_de_genero.pipelines import pdf_scrap as ps
-from d2_violencia_de_genero.pipelines import pdf_extract_incremental as pi
-
-###########################################################################
-# Here you can find an example pipeline, made of two modular pipelines.
-#
-# Delete this when you start working on your own Kedro project as
-# well as pipelines/data_science AND pipelines/data_engineering
-# -------------------------------------------------------------------------
+from kedro.pipeline import Pipeline, node
+from .nodes import (
+    extract_information,
+    filter_pages,
+    filt_dict,
+    filt_list,
+)
 
 
-def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
-    """Create the project's pipeline.
-
-    Args:
-        kwargs: Ignore any additional arguments added in the future.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-
-    """
-
-    pdf_extract_pipeline = pe.create_pipeline()
-    pdf_scrap_pipeline = ps.create_pipeline()
-    pdf_extract_inc = pi.create_pipeline()
-
-    return {
-        "ps": pdf_scrap_pipeline,
-        "pe": pdf_extract_pipeline,
-        "pi": pdf_extract_inc,
-        "__default__": pdf_extract_pipeline + pdf_scrap_pipeline,
-    }
+def create_pipeline(**kwargs):
+    return Pipeline(
+        [
+            node(
+                func=extract_information,
+                inputs="pdf_ovd_part",
+                outputs="dict_pages",
+            ),
+            node(
+                func=filter_pages,
+                inputs="dict_pages",
+                outputs="filt_pages",
+            ),
+            node(
+                func=filt_dict,
+                inputs=["dict_pages", "filt_pages"],
+                outputs="json_ovd_data",
+            ),
+            node(
+                func=filt_list, inputs=["dict_pages", "filt_pages"], outputs="filt_list"
+            ),
+        ]
+    )

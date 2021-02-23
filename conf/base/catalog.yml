@@ -57,6 +57,10 @@ json_ovd_data:
 
 excel_ovd_data:
   type: pandas.ExcelDataSet
-  filepath: data/02_intermediate/OVD_text2.xlsx
+  filepath: data/02_intermediate/OVD_text1.xlsx
 
-
+pdf_ovd_completo:
+  type: IncrementalDataSet
+  dataset: d2_violencia_de_genero.extras.datasets.pdf_dataset.PdfDataSet
+  path: data/01_raw/OVD_data
+  filename_suffix: ".pdf"

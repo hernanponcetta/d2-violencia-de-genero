@@ -39,9 +39,15 @@ def create_pipeline(**kwargs):
     return Pipeline(
         [
             node(
-                func=extract_information, inputs="pdf_ovd_data", outputs="dict_pages",
+                func=extract_information,
+                inputs="pdf_ovd_data",
+                outputs="dict_pages",
             ),
-            node(func=filter_pages, inputs="dict_pages", outputs="filt_pages",),
+            node(
+                func=filter_pages,
+                inputs="dict_pages",
+                outputs="filt_pages",
+            ),
             node(
                 func=filt_dict,
                 inputs=["dict_pages", "filt_pages"],
